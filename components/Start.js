@@ -3,7 +3,6 @@ import { StyleSheet, View, Text, Button, TextInput, ImageBackground, TouchableOp
 
 const Start = ({ navigation }) => {
     const [name, setName] = useState('');
-    const colors = ['#FF0000', '#0000FF', '#008000', '#808080'];
     const [background, setBackground] = useState('');
     return (
 
@@ -93,4 +92,9 @@ const styles = StyleSheet.create({
     }
 });
 
+
 export default Start;
+
+
+
+
