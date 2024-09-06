@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { StyleSheet, View, Text, Button, TextInput, ImageBackground, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, Button, TextInput, ImageBackground, TouchableOpacity, Platform, KeyboardAvoidingView } from "react-native";
 
 const Start = ({ navigation }) => {
     const [name, setName] = useState('');
     const [background, setBackground] = useState('');
-    return (
 
+    { Platform.OS === "ios" ? <KeyboardAvoidingView behavior="padding" /> : null }
+    return (
+        // renders list of different colors user can choose as background
         <View style={styles.container}>
             <ImageBackground source={require("../assets/BgImage.png")}
                 style={styles.imageBackground}
@@ -54,6 +56,8 @@ const Start = ({ navigation }) => {
                 ]}
                 onPress={() => setBackground("#808080")}
             />
+            {Platform.OS === "ios" ? <KeyboardAvoidingView behavior="padding" /> : null}
+            {Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null}
         </View>
     );
 }
