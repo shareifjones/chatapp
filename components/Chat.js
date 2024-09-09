@@ -5,7 +5,7 @@ import { Bubble, GiftedChat } from "react-native-gifted-chat";
 import { collection, addDoc, onSnapshot, query, where, orderBy } from "firebase/firestore";
 
 const Chat = ({ route, navigation, db }) => {
-    const { name, background } = route.params;
+    const { name, background, userID } = route.params;
     const [messages, setMessages] = useState([]);
 
     // renders the different color message bubbles
@@ -61,7 +61,7 @@ const Chat = ({ route, navigation, db }) => {
                 renderBubble={renderBubble}
                 onSend={messages => onSend(messages)}
                 user={{
-                    _id: 1,
+                    _id: userID,
                     name: name
                 }}
             />
