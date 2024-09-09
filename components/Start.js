@@ -1,9 +1,23 @@
 import { useState } from "react";
-import { StyleSheet, View, Text, Button, TextInput, ImageBackground, TouchableOpacity, Platform, KeyboardAvoidingView } from "react-native";
+import { StyleSheet, View, Text, Button, TextInput, ImageBackground, TouchableOpacity, Platform, KeyboardAvoidingView, Alert } from "react-native";
+import { getAuth, signInAnonymously } from "firebase/auth";
+
 
 const Start = ({ navigation }) => {
+    const auth = getAuth();
     const [name, setName] = useState('');
     const [background, setBackground] = useState('');
+
+    const signInUser = () => {
+        signInAnonymously(auth)
+            .then(result => {
+                navigation.navigate("Chat", { userID: result.user.uid, name: name, background: background });
+                Alert.alert("Signed in Successfully!");
+            })
+            .catch((error) => {
+                Alert.alert("Unable to sign in, try later again.");
+            })
+    }
 
     { Platform.OS === "ios" ? <KeyboardAvoidingView behavior="padding" /> : null }
     return (
@@ -21,7 +35,13 @@ const Start = ({ navigation }) => {
             />
             <Button
                 title="Enter chatroom"
-                onPress={() => navigation.navigate('Chat', { name: name, background: background })}
+                onPress={() => {
+                    if (name == '') {
+                        Alert.alert('Type a name');
+                    } else {
+                        signInUser();
+                    }
+                }}
             />
             <Text>Choose a Chat Background Color: </Text>
             <TouchableOpacity
