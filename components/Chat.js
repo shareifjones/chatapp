@@ -5,7 +5,7 @@ import { Bubble, GiftedChat, InputToolbar } from "react-native-gifted-chat";
 import { collection, addDoc, onSnapshot, query, where, orderBy } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Chat = ({ route, navigation, db }) => {
+const Chat = ({ route, navigation, db, isConnected }) => {
     const { name, background, userID } = route.params;
     const [messages, setMessages] = useState([]);
 
