@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import Start from './components/Start';
 import Chat from './components/Chat';
 import { NavigationContainer } from '@react-navigation/native';
@@ -7,13 +7,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { initializeApp } from "firebase/app";
 import { getFirestore, enableNetwork, disableNetwork } from "firebase/firestore";
 import { useNetInfo } from "@react-native-community/netinfo";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { LogBox, Alert } from "react-native";
+import * as ImagePicker from 'expo-image-picker';
+import { getStorage } from "firebase/storage";
 
-
-const Stack = createNativeStackNavigator();
 
 LogBox.ignoreLogs(["AsyncStorage has been extracted from"]);
+
+const Stack = createNativeStackNavigator();
 
 
 const App = () => {
@@ -30,9 +32,11 @@ const App = () => {
   const app = initializeApp(firebaseConfig);
 
   // Initialize Cloud Firestore and get a reference to the service
+  const storage = getStorage(app);
   const db = getFirestore(app);
 
   const connectionStatus = useNetInfo();
+
   useEffect(() => {
     if (connectionStatus.isConnected === false) {
       Alert.alert("Connection Lost!");
@@ -42,7 +46,9 @@ const App = () => {
     }
   }, [connectionStatus.isConnected]);
 
+
   return (
+
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Start"
@@ -53,7 +59,7 @@ const App = () => {
         />
         <Stack.Screen
           name="Chat">
-          {props => <Chat isConnected={connectionStatus.isConnected} db={db} {...props} />}
+          {props => <Chat isConnected={connectionStatus.isConnected} db={db} storage={storage} {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
