@@ -1,4 +1,3 @@
-import { CurrentRenderContext } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { StyleSheet, View, Text, KeyboardAvoidingView, Platform } from "react-native";
 import { Bubble, GiftedChat, InputToolbar } from "react-native-gifted-chat";
@@ -12,10 +11,6 @@ const Chat = ({ route, navigation, db, isConnected, storage }) => {
     const { name, background, userID } = route.params;
     const [messages, setMessages] = useState([]);
 
-    // sets user's name to title
-    useEffect(() => {
-        navigation.setOptions({ title: name });
-    }, []);
 
 
 
@@ -47,6 +42,10 @@ const Chat = ({ route, navigation, db, isConnected, storage }) => {
         }
     }, [isConnected]);
 
+    const onSend = (newMessages) => {
+        addDoc(collection(db, "messages"), newMessages[0])
+    }
+
     const cacheMessages = async (messagesToCache) => {
         try {
             await AsyncStorage.setItem('messages', JSON.stringify(messagesToCache));
@@ -60,11 +59,6 @@ const Chat = ({ route, navigation, db, isConnected, storage }) => {
         setMessages(JSON.parse(cachedMessages));
     }
 
-
-
-    const onSend = (newMessages) => {
-        addDoc(collection(db, "messages"), newMessages[0])
-    }
 
     // renders the different color message bubbles
     const renderBubble = (props) => {
@@ -87,7 +81,7 @@ const Chat = ({ route, navigation, db, isConnected, storage }) => {
     }
 
     const renderCustomActions = (props) => {
-        return <CustomActions storage={storage} userID={userID} {...props} />;
+        return <CustomActions storage={storage} {...props} />;
     }
 
     const renderCustomView = (props) => {
@@ -112,6 +106,11 @@ const Chat = ({ route, navigation, db, isConnected, storage }) => {
         }
         return null;
     }
+
+    // sets user's name to title
+    useEffect(() => {
+        navigation.setOptions({ title: name });
+    }, []);
 
     return (
         <View style={[styles.container, { backgroundColor: background }]}>

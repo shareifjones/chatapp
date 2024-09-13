@@ -7,13 +7,12 @@ import { useState } from "react";
 
 const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, userID, storage }) => {
     const actionSheet = useActionSheet();
-    const [location, setLocation] = useState(null);
-
 
 
     const onActionPress = () => {
         const options = ['Choose From Library', 'Take Picture', 'Send Location', 'Cancel'];
         const cancelButtonIndex = options.length - 1;
+
         actionSheet.showActionSheetWithOptions(
             {
                 options,
@@ -93,7 +92,7 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, userID, storage })
                 <Text style={[styles.iconText, iconTextStyle]}>+</Text>
             </View>
         </TouchableOpacity >
-    );
+    )
 }
 
 const styles = StyleSheet.create({
