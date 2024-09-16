@@ -43,7 +43,7 @@ const Chat = ({ route, navigation, db, isConnected, storage }) => {
     }, [isConnected]);
 
     const onSend = (newMessages) => {
-        addDoc(collection(db, "messages"), newMessages[0])
+        addDoc(collection(db, 'messages'), newMessages[0])
     }
 
     const cacheMessages = async (messagesToCache) => {
