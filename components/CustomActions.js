@@ -4,8 +4,9 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Location from 'expo-location';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, userID, storage }) => {
+const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, userID, storage, name }) => {
     const actionSheet = useActionSheet();
 
 
@@ -57,15 +58,22 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, userID, storage })
         if (permissions?.granted) {
             const location = await Location.getCurrentPositionAsync({});
             if (location) {
-                onSend({
+                const locationMessage = {
+                    _id: uuidv4(),
+                    text: "",
+                    createdAt: new Date(),
+                    user: { _id: userID, name: name },
                     location: {
-                        longitude: location.coords.longitude,
                         latitude: location.coords.latitude,
+                        longitude: location.coords.longitude,
                     },
-                });
+                };
+                onSend([locationMessage]);
             } else Alert.alert("Error occurred while fetching location");
         } else Alert.alert("Permissions haven't been granted.");
     }
+
+
 
     const generateReference = (uri) => {
         const timeStamp = (new Date()).getTime();
@@ -80,10 +88,16 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, userID, storage })
         const blob = await response.blob();
         uploadBytes(newUploadRef, blob).then(async (snapshot) => {
             const imageURL = await getDownloadURL(snapshot.ref)
-            onSend({ image: imageURL })
+            const imageMessage = {
+                _id: uuidv4(),
+                text: "",
+                createdAt: new Date(),
+                user: { _id: userID, name: name },
+                image: imageURL,
+            };
+            onSend([imageMessage])
         });
     }
-
 
 
     return (
