@@ -2,11 +2,11 @@
 ChatApp is a real-time messaging platform developed with React Native, Firebase, and Expo. It enables users to exchange messages, share images, and send their live location. The app also features displaying offline messages.
 
 ## Features
-Real-time Messaging: Users can send and receive messages instantly.
-Image Sharing: Users can share images from their device's library or take new photos.
-Location Sharing: Users can share their current location.
-Offline Support: Messages are cached locally, and users can continue to access them while offline.
-Anonymous Login: Users can sign in anonymously and start chatting without creating an account.
+- **Real-time Messaging**: Users can receive and send messages instantly on a simple chat interface.
+- **Image Sharing**: Users can share images taken on their phone or photos from their gallery.
+- **Location Sharing**: Users can share their current location.
+- **Offline Functionality**: Users can access and read old messages while offline.
+- **User Authentication**: Users can authenticate themselves anonymously.
 
 ## User Stories
 - **As a user**, I want to be able to easily enter a chat room so I can quickly start talking to my friends and family. 
@@ -46,13 +46,13 @@ nvm use 16.19.0
 1. **Clone the repository:**
 
     ```sh
-    git clone https://github.com/jdeebs/chat-app.git
+    git clone https://github.com/shareifjones/chatapp.git
     ```
 
 2. **Navigate to the project directory:**
 
     ```sh
-    cd chat-app
+    cd chatapp
     ```
 
 3. **Install dependencies:**
@@ -72,7 +72,7 @@ nvm use 16.19.0
 Firebase Configuration: Sign in to Google Firebase.
 
 1. Create a new Firebase project.
-2. Set up Firestore Database in production mode.
-3. Adjust Firestore Rules to allow read and write access.
-4. Configure Firebase Storage (optional).
+2. Put Firestore Database in production mode.
+3. Configure Firebase Storage in order to store photos and locations.
+4. Adjust Firestore Rules to allow read and write access for both the database and storage.
 
