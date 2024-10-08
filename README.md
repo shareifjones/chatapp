@@ -1,2 +1,78 @@
 # chatapp
- 
+ChatApp is a real-time messaging platform developed with React Native, Firebase, and Expo. It enables users to exchange messages, share images, and send their live location. The app also features displaying offline messages.
+
+## Features
+Real-time Messaging: Users can send and receive messages instantly.
+Image Sharing: Users can share images from their device's library or take new photos.
+Location Sharing: Users can share their current location.
+Offline Support: Messages are cached locally, and users can continue to access them while offline.
+Anonymous Login: Users can sign in anonymously and start chatting without creating an account.
+
+## User Stories
+- **As a user**, I want to be able to easily enter a chat room so I can quickly start talking to my friends and family. 
+- **As a user**, I want to be able to send messages to my friends and family members to exchange the latest news. 
+- **As a user**, I want to send images to my friends to show them what I’m currently doing. 
+- **As a user**, I want to share my location with my friends to show them where I am. 
+- **As a user**, I want to be able to read my messages offline so I can reread conversations at any time. 
+- **As a user**, with a visual impairment, I want to use a chat app that is compatible with a screen reader so that I can engage with a chat interface.
+
+## Prerequisites
+Before setting up the app, make sure you have the following prerequisites installed:
+
+- Node.js (v14 or higher)
+- Expo CLI
+- Android Studio
+- Xcode (For iOS development - macOS only)
+- Firebase project set up with Firestore and Firebase Storage
+
+## Usage
+
+1. Enter your name and select a background color to enter the chat room.
+2. Send text messages, images, and even share your current location.
+3. Access and view messages offline, ensuring your chat history is always available.
+
+
+## Installation
+
+### Node.js Version
+
+Downgrade Node.js to version "16.19.0":
+
+```bash
+nvm install 16.19.0
+nvm use 16.19.0
+```
+
+1. **Clone the repository:**
+
+    ```sh
+    git clone https://github.com/jdeebs/chat-app.git
+    ```
+
+2. **Navigate to the project directory:**
+
+    ```sh
+    cd chat-app
+    ```
+
+3. **Install dependencies:**
+
+    ```sh
+    npm install
+    ```
+
+4. **Start the application locally:**
+
+    ```sh
+    npm start
+    ```
+
+## Firebase Configuration
+
+Firebase Configuration: Sign in to Google Firebase.
+
+1. Create a new Firebase project.
+2. Set up Firestore Database in production mode.
+3. Adjust Firestore Rules to allow read and write access.
+4. Configure Firebase Storage (optional).
+
